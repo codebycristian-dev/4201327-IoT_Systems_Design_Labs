@@ -45,13 +45,24 @@ This course teaches you to **design complete IoT systems**, not just write code 
 ### Week 1: Fundamentals
 
 **Module 1: Networking & IoT Introduction**
-→ [Read: 0_networking_recap.md](0_networking_recap.md)
+→ [Read: 0_1_networking_recap.md](0_1_networking_recap.md)
 - Recap: Networking, Internet, IPv4 vs IPv6
 - Introduction to IoT Systems
 - The "Constraint" Triangle
 - First Principles Review
 
-**Note**: The practical Labs (1-8) begin in Week 2.
+**Lab 0: Minimal IoT Implementation (HTTP)**
+→ [0_2_Minimal_IoT_Implementation_http.md](0_2_Minimal_IoT_Implementation_http.md)
+- Build a minimal sensing + actuating system using HTTP request/response
+- ESP-IDF project: `http_simple/` | Dashboard: `tools/dashboard_http.py`
+
+**Lab 1: Minimal IoT Implementation (MQTT)**
+→ [0_3_Minimal_IoT_Implementation_mqtt.md](0_3_Minimal_IoT_Implementation_mqtt.md)
+- Rebuild the same system using MQTT publish/subscribe
+- Compare HTTP vs MQTT architectures
+- ESP-IDF project: `mqtt_simple/` | Dashboard: `tools/dashboard_mqtt.py`
+
+**Note**: The advanced Labs (1-8) begin in Week 2.
 
 ---
 
@@ -133,6 +144,8 @@ Each lab includes:
 ### Core Documents (Read These)
 
 1. **[0_setup.md](0_setup.md)** - Environment setup guide
+1. **[0_2_Minimal_IoT_Implementation_http.md](0_2_Minimal_IoT_Implementation_http.md)** - Lab 0: Minimal IoT with HTTP
+1. **[0_3_Minimal_IoT_Implementation_mqtt.md](0_3_Minimal_IoT_Implementation_mqtt.md)** - Lab 1: Minimal IoT with MQTT
 2. **[1_project_scenario.md](1_project_scenario.md)** - GreenField Technologies project briefing
 3. **[2_iso_architecture.md](2_iso_architecture.md)** - ISO/IEC 30141:2024 architecture guide
 4. **[3_deliverables_template.md](3_deliverables_template.md)** - DDR and ADR templates
@@ -174,7 +187,7 @@ Different audiences care about different aspects:
 - **Samuel (Architect)**: Technical depth, ISO alignment
 - **Gustavo (Product)**: Cost, performance, business value
 - **Edwin (Operations)**: Deployment, troubleshooting
-- **Sebastian (Security)**: Threat mitigation, compliance
+- **Edward (Security)**: Threat mitigation, compliance
 - **Daniela (Farmer)**: Test system on field
 
 ---

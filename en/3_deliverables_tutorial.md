@@ -35,7 +35,7 @@
 *   **To Daniela:** (e.g., Remote access status...)
 
 ### Lab 6: Security
-*   **To Sebastian (Security):** (e.g., Threat model summary...)
+*   **To Edward (Security):** (e.g., Threat model summary...)
 
 ### Lab 7: Dashboard
 *   **To Gustavo (Product):** (e.g., Battery health monitoring...)
@@ -58,14 +58,24 @@
 
 ---
 
-## 4. ISO/IEC 30141 Domain Mapping
+## 4. ISO/IEC 30141 Mapping
 *Map your components to the 6 Domains. Update continuously.*
+
+### Domain Mapping
 
 | Component | ISO Domain | Justification |
 |-----------|------------|---------------|
 | Example: Soil Sensor | SCD | Sensing Entity |
 | Example: Thread Mesh | SCD | Network Support |
 | ... | ... | ... |
+
+### Component Capabilities
+*Track the capabilities your system exposes. This table grows as you enable more capabilities each week. A capability that was Latent in Lab 1 may become Active in Lab 5.*
+
+| Capability Category | Subcategory | Component/Feature | Active/Latent | Lab Introduced |
+|---------------------|-------------|-------------------|---------------|----------------|
+| Transducer | Sensing | Soil moisture ADC | Active | Lab 4 |
+| ... | ... | ... | ... | ... |
 
 ---
 
@@ -104,3 +114,55 @@
 *   [ ] **Lab 5:** System works locally without cloud (Sustainability).
 *   [ ] **Lab 6:** Encryption enabled (Privacy).
 *   [ ] **Lab 8:** End-of-Life plan considered.
+
+---
+
+## 8. Viewpoint Analysis
+*Track which ISO/IEC 30141 viewpoints you addressed each lab.*
+
+| Viewpoint | Labs Addressed | Key Concerns Documented |
+|-----------|----------------|-------------------------|
+| Foundational | Lab 1-2 | (e.g., "What is our IoT component? ESP32-C6 with 802.15.4 radio") |
+| Business |               |                         |
+| Usage |                  |                         |
+| Functional |             |                         |
+| Trustworthiness | Lab 6 | (e.g., "7 characteristics audited, DTLS addresses confidentiality/integrity/reliability") |
+| Construction | Lab 8 | (e.g., "IoT System Pattern completed") |
+
+---
+
+## 9. Trustworthiness Audit (Lab 6+)
+*Fill this in during Lab 6. Revisit in Lab 8 to check if gaps were closed.*
+
+| Characteristic | Addressed? | How | Gaps |
+|----------------|------------|-----|------|
+| Availability |            |     |      |
+| Confidentiality |         |     |      |
+| Integrity |               |     |      |
+| Reliability |             |     |      |
+| Resilience |              |     |      |
+| Safety |                  |     |      |
+| Compliance |              |     |      |
+
+---
+
+## 10. Construction Viewpoint - IoT System Pattern (Lab 8)
+*This is your single-page system summary. An architect should be able to understand your entire system from this table alone.*
+
+| Pattern Element | Category | Your System |
+|-----------------|----------|-------------|
+| IoT System |            |             |
+| IoT Components |         |             |
+| Digital Network |        |             |
+| IoT Devices |            |             |
+| Primary Capability (observation) | |   |
+| Primary Capability (control) | |       |
+| Secondary Capability (processing) | |  |
+| Secondary Capability (transferring) | | |
+| Secondary Capability (storage) | |     |
+| Interface (network) |    |             |
+| Interface (human UI) |   |             |
+| Interface (application) | |            |
+| Supplemental (security) | |            |
+| Supplemental (orchestration) | |       |
+| Supplemental (management) | |          |

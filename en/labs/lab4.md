@@ -58,6 +58,12 @@ graph TD
     style ASD fill:#f9f,stroke:#333,stroke-width:2px
 ```
 
+> **ISO/IEC 30141 Communication Type**: Downlink control (commands to actuators) flows through the **Access Network**. The standard emphasizes that access networking supports both data transfer and management/control signals.
+
+### Emergent Characteristic: Functional/Management Separation
+
+Notice that your downlink commands (CoAP PUT to `/farm/valve`) travel on the **functional plane**, while Thread's network healing — when a router dies or a new device joins — happens on the **management plane**. These two planes operate independently: a network reconfiguration does not interrupt your pending CoAP transactions; they simply get rerouted through an alternate path. This is ISO/IEC 30141 Section 6.2.2.3.3 in action.
+
 ---
 
 ## 2. Theory Preamble (15 min)
@@ -66,6 +72,8 @@ graph TD
 * **Uplink vs Downlink:** Sending data *to* the cloud is easy (Node initiates). Receiving data *from* the cloud is hard (Node is asleep).
 * **Poll Period:** The "Sleepy End Device" must wake up periodically (e.g., every 5s) to ask its parent: "Do you have messages for me?"
 * **Idempotency:** If I send "OPEN VALVE" twice by mistake, it shouldn't open, close, and open again. It should just stay open.
+
+> **In other stacks:** MQTT handles downlink naturally via subscriptions — the broker queues messages for sleeping clients. In LoRaWAN, downlink is severely limited (Class A devices can only receive in short windows after uplink). CoAP's approach (polling + confirmable messages) sits between these extremes.
 
 ---
 

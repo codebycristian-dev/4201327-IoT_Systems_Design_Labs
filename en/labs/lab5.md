@@ -62,6 +62,17 @@ graph LR
     style ASD fill:#dfd,stroke:#333,stroke-width:2px
 ```
 
+> **ISO/IEC 30141 Communication Type**: The Border Router bridges **Proximity Networking** (Thread/802.15.4) to **Service Networking** (WiFi/Internet). This is the gateway pattern — translating between constrained and unconstrained networks. The standard also introduces **User Networking** here, as the dashboard gives users access to the IoT system.
+
+### Emergent Characteristic: Functional/Management Separation
+
+The Border Router is a clear example of ISO/IEC 30141 Section 6.2.2.3.3 — functional and management capability separation:
+
+- **Functional**: Forwards CoAP packets between the Thread mesh and WiFi/Ethernet (NAT64/DNS64) — the actual sensor data and valve commands
+- **Management**: Advertises network prefixes, manages Thread commissioning, serves the OTBR web UI
+
+Both planes pass through the same physical device but use separate interfaces and protocols. You can reconfigure commissioning settings in the OTBR web UI without affecting in-flight CoAP traffic.
+
 ---
 
 ## 2. Theory Preamble (15 min)
@@ -69,6 +80,8 @@ graph LR
 
 * **The Edge Gateway:** The most critical component in ISO 30141. It sits between the **Sensing Domain** (Local) and the **Application Domain** (Cloud).
 * **NAT64:** Most of the internet is IPv4. The OTBR translates our Thread IPv6 packets into IPv4 so we can talk to cloud servers.
+
+> **In other stacks:** LoRaWAN uses dedicated gateways (not border routers) that bridge to cloud via backhaul. BLE devices typically use a phone as the gateway. The Border Router role — translating between constrained and unconstrained networks — exists in every IoT architecture, just with different names.
 
 ---
 

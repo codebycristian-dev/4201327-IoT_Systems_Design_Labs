@@ -60,6 +60,8 @@ graph TD
     style SCD fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
+> **ISO/IEC 30141 Communication Type**: By adding mesh routing, you're building the **Proximity Network** into a self-healing topology. The standard notes that proximity networking is often limited to the SCD but enables the access network above it.
+
 ---
 
 ## 2. Theory Preamble (15 min)
@@ -68,6 +70,8 @@ graph TD
 * **The Concept:** 6LoWPAN (IPv6 over Low-Power WPAN).
 * **The Mechanism:** **MLE (Mesh Link Establishment)**. Nodes use "Trickle Timers" to advertise their presence.
 * **The Trade-off:** A "Router" is always on (RX enabled), consuming ~30mA. A "Sleepy End Device" sleeps, consuming 5uA.
+
+> **In other stacks:** BLE Mesh uses flood-based routing (every node relays every message) instead of Thread's address-based routing. Zigbee uses tree routing. Each approach trades latency, bandwidth, and power differently — but all solve the same mesh resilience problem.
 
 ---
 

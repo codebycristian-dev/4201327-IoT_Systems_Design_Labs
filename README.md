@@ -26,6 +26,8 @@
 |----------|-------------|
 | [📖 Course Overview](en/README.md) | Start here - complete course introduction |
 | [⚙️ Setup Guide](en/0_setup.md) | Install ESP-IDF and configure environment |
+| [🌐 Minimal IoT: HTTP](en/0_2_Minimal_IoT_Implementation_http.md) | Lab 0 - Build a minimal IoT system with HTTP |
+| [📡 Minimal IoT: MQTT](en/0_3_Minimal_IoT_Implementation_mqtt.md) | Lab 1 - Rebuild with MQTT publish/subscribe |
 | [🎯 Project Scenario](en/1_project_scenario.md) | GreenField Technologies - your role as IoT engineer |
 | [🏗️ ISO Architecture](en/2_iso_architecture.md) | ISO/IEC 30141:2024 reference architecture guide |
 | [📝 Templates](en/3_deliverables_template.md) | DDR and ADR templates for deliverables |
@@ -95,7 +97,8 @@ Week/Semana 7-8:  Dashboard & Integration   →  All 6 ISO Domains
 | Tool | Description |
 |------|-------------|
 | [tools/coap_client.py](tools/coap_client.py) | CoAP client for testing |
-| [tools/dashboard.py](tools/dashboard.py) | Simple dashboard server |
+| [tools/dashboard_http.py](tools/dashboard_http.py) | HTTP dashboard server (Lab 0) |
+| [tools/dashboard_mqtt.py](tools/dashboard_mqtt.py) | MQTT dashboard server (Lab 1) |
 | [tools/ota_server.py](tools/ota_server.py) | OTA update server |
 | [tools/test_e2e.py](tools/test_e2e.py) | End-to-end system tests |
 
@@ -146,13 +149,19 @@ Week/Semana 7-8:  Dashboard & Integration   →  All 6 ISO Domains
 ├── en/                          🇬🇧 English Course
 │   ├── README.md                   Course overview
 │   ├── 0_setup.md                  Environment setup
+│   ├── 0_1_networking_recap.md     Networking fundamentals
+│   ├── 0_2_Minimal_IoT_...http.md  Lab 0: Minimal IoT (HTTP)
+│   ├── 0_3_Minimal_IoT_...mqtt.md  Lab 1: Minimal IoT (MQTT)
 │   ├── 1_project_scenario.md       GreenField project
 │   ├── 2_iso_architecture.md       ISO/IEC 30141 guide
 │   ├── 3_deliverables_template.md  DDR & ADR templates
 │   ├── references.md               Quick references
 │   └── labs/                       8 lab guides
 │       ├── lab1.md - lab8.md
-│       └── implementacion/         Detailed guides
+│       └── sops/                   Detailed guides
+│
+├── http_simple/                 ESP-IDF project for Lab 0 (HTTP)
+├── mqtt_simple/                 ESP-IDF project for Lab 1 (MQTT)
 │
 ├── es/                          🇪🇸 Curso en Español
 │   ├── README.md                   Vista general del curso
@@ -167,7 +176,8 @@ Week/Semana 7-8:  Dashboard & Integration   →  All 6 ISO Domains
 │
 └── tools/                       🛠️ Utilities (language-agnostic)
     ├── coap_client.py
-    ├── dashboard.py
+    ├── dashboard_http.py         HTTP dashboard (Lab 0)
+    ├── dashboard_mqtt.py         MQTT dashboard (Lab 1)
     ├── ota_server.py
     └── test_e2e.py
 ```

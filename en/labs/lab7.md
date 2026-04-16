@@ -69,6 +69,8 @@ graph TD
     * *Telemetry:* "Battery is 3.1V, RSSI is -85dBm" (For Edwin).
 * **The Cost of Observability:** Sending telemetry costs energy. Don't send it every second. Piggyback it on data packets or send it hourly.
 
+> **In other stacks:** Industrial IoT often uses OPC-UA for telemetry instead of CoAP. Cloud platforms (AWS IoT, Azure IoT Hub, ThingsBoard) provide OMD features out-of-the-box. The OMD domain functions (monitoring, lifecycle management) are the same — only the implementation platform differs.
+
 ---
 
 ## 3. Execution Tasks

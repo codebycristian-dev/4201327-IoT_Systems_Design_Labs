@@ -300,7 +300,7 @@ Ethics isn't a separate module—it's woven through your technical work:
 
 In your **Design Decision Record**, include ethical considerations:
 
-**Section 4.5 (Stakeholder Summary - Sebastian)**: Security and privacy implications of your design choices.
+**Section 4.5 (Stakeholder Summary - Edward)**: Security and privacy implications of your design choices.
 
 **Section 5 (First Principles)**: Why your data collection approach is proportionate to the functionality provided.
 

@@ -2,7 +2,7 @@
 
 > **Main Lab Guide:** [Lab 6: Security & Trustworthiness](../lab6.md)
 > **ISO Domains:** RAID (Resource Access), Trustworthiness (Cross-cutting)
-> **GreenField Context:** Fixing Sebastian's penetration test findings - stopping attackers from flooding Daniela's greenhouse
+> **GreenField Context:** Fixing Edward's penetration test findings - stopping attackers from flooding Daniela's greenhouse
 > **Ethics:** See [Ethics & Sustainability Guide](../../4_ethics_sustainability.md) for privacy implications
 
 ## Objectives
