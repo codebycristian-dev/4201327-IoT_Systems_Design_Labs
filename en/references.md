@@ -557,13 +557,13 @@ python tools/coap_client.py --host fd00::1234 observe /sensor
 
 ---
 
-#### 2. Dashboard Server (`tools/dashboard.py`)
+#### 2. Dashboard Server (`tools/dashboard_http.py`)
 
 Flask-based web dashboard for monitoring sensor data.
 
 ```bash
 # Configure the node IP in the script first
-python tools/dashboard.py
+python tools/dashboard_http.py
 # Open http://localhost:5000 in your browser
 ```
 

@@ -62,6 +62,17 @@ graph TD
     style Network fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
+> **ISO/IEC 30141 Communication Type**: CoAP operates at the **Access Networking** layer — it carries application data (sensor readings) and control signals (commands) between the edge and application logic. This is where SCD connects to ASD.
+
+### Emergent Characteristic: Functional/Management Separation
+
+ISO/IEC 30141 Section 6.2.2.3.3 identifies separation of functional and management capabilities as a key IoT characteristic. In your system:
+
+- **Functional plane**: CoAP messages carrying sensor data (what you are building today)
+- **Management plane**: Thread's MLE, leader election, routing table updates (handled automatically by OpenThread)
+
+This separation means you can swap your application protocol (e.g. CoAP to MQTT-SN) without touching the network management layer, and vice versa. Thread deliberately separates these concerns so that application developers and network engineers can work independently.
+
 ---
 
 ## 2. Theory Preamble (15 min)
@@ -72,6 +83,8 @@ graph TD
     * JSON: `{"t": 24.5}` (10 bytes).
     * CBOR: `A1 61 74 F9 45 00` (6 bytes).
     * **Result:** Shorter "Radio On" time.
+
+> **In other stacks:** Most non-constrained IoT systems use MQTT (pub/sub over TCP) instead of CoAP (request/response over UDP). MQTT excels at fan-out (one sensor, many subscribers) but requires a broker and a persistent TCP connection — too expensive for battery-powered Thread devices.
 
 ---
 

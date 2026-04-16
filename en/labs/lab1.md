@@ -103,6 +103,8 @@ By the end of this lab, you will be able to:
 
 **Bottom line**: IEEE 802.15.4 is the "Goldilocks" solution - just enough range, just enough power efficiency.
 
+> **In other stacks:** If GreenField needed 10km range for remote pastures, we'd test LoRa (sub-GHz) here instead of 802.15.4. The Proximity Networking concept and testing methodology (RSSI, PER, link budget) are identical — only the frequencies and range expectations change.
+
 <details>
 <summary><b>🔬 Advanced: Energy Budget Math & O-QPSK Modulation (Click to expand)</b></summary>
 
@@ -168,7 +170,7 @@ idf.py -p /dev/ttyUSB0 flash monitor
 **For your DDR** (Section 4 - Architectural Mapping):
 | Component | ISO Domain | Justification |
 |-----------|------------|---------------|
-| ESP32-C6 SoC | SCD | Sensing/Controlling device (Section 8.3 of standard) |
+| ESP32-C6 SoC | SCD | Sensing/Controlling device (Section 6.4-6.5 of standard) |
 | 802.15.4 Radio | SCD | Communication subsystem |
 | Antenna | SCD | Physical interface to PED |
 | Air (RF medium) | PED | Physical entity - electromagnetic propagation |
@@ -472,15 +474,50 @@ graph TD
     style SCD fill:#fff4e1
 ```
 
+> **ISO/IEC 30141 Communication Type**: This lab focuses on **Proximity Networking** — the short-range radio link between sensor nodes. The standard calls this the foundational data path within the SCD, connecting devices to gateways.
+
 **For your DDR** (Section 4 - Architectural Mapping):
 - List each component (ESP32-C6, antenna, air/RF medium)
 - Assign it to the correct domain (PED or SCD)
 - Justify why (1-2 sentences)
 
 **Example**:
-> "The ESP32-C6's 802.15.4 radio belongs to the **SCD (Sensing & Controlling Domain)** because it's the communication subsystem that enables sensing devices to exchange data (per ISO/IEC 30141 Section 8.3)."
+> "The ESP32-C6's 802.15.4 radio belongs to the **SCD (Sensing & Controlling Domain)** because it's the communication subsystem that enables sensing devices to exchange data (per ISO/IEC 30141 Section 6.4-6.5)."
 
 📖 **See** [2_iso_architecture.md](../2_iso_architecture.md) for detailed explanations of all six domains.
+
+---
+
+### Map Your ESP32-C6 to the Component Capabilities Model
+
+ISO/IEC 30141:2024 (Figure 8 / Table 9-10) defines five **capability categories** that describe what any IoT component can do: *transducer*, *data*, *interface*, *supporting*, and *latent*. Understanding these helps architects quickly assess what a device can and cannot provide in a system — before writing a single line of code.
+
+Your ESP32-C6 devkit has more capabilities than you used today. Some are active, some are latent (hardware present but unused). Decompose your board using the table below.
+
+**Pre-filled example for the ESP32-C6 devkit**:
+
+| Capability Category | Subcategory | Your Board's Capability | Active / Latent? |
+|---------------------|-------------|-------------------------|-------------------|
+| **Transducer** | Sensing | Temperature sensor via ADC (if attached) | Latent (no sensor wired yet) |
+| **Transducer** | Actuating | On-board LED | Active |
+| **Data** | Processing | Filtering RSSI readings in firmware | Active |
+| **Data** | Storing | NVS flash for config/calibration | Active |
+| **Data** | Transferring | 802.15.4 radio (TX/RX) | Active |
+| **Interface** | Network | 802.15.4 radio interface | Active |
+| **Interface** | Application | OpenThread CLI | Active |
+| **Interface** | Human UI | Serial monitor over USB | Active |
+| **Supporting** | Time sync | Not yet implemented | Latent |
+| **Supporting** | Security | Hardware crypto accelerator | Latent (available but unused) |
+| **Latent** | — | BLE radio (present, unused) | Latent |
+| **Latent** | — | WiFi radio (present, unused in sensor role) | Latent |
+| **Latent** | — | USB (debug only, not application data) | Latent |
+
+📐 **Exercise**: Copy this table into your notes. For each row, confirm or correct the "Active / Latent?" column based on what you actually used in Lab 1. Add any capabilities you discover that are missing.
+
+**For your DDR** (Section 4 — Component Capabilities):
+Include this completed table in your DDR. For each capability, write one sentence explaining *why* you classified it as active or latent. This table will grow as you enable more features in later labs.
+
+📖 **See** ISO/IEC 30141:2024 Section 9, Tables 9-10 for the full capability taxonomy.
 
 ---
 
@@ -499,7 +536,7 @@ graph TD
 | **Section 1**: Foundational Viewpoint | Describe your IoT device | "ESP32-C6 with 802.15.4 radio, battery-powered, max range ~15m" |
 | **Section 2**: Stakeholder Communication | Summarize findings for Samuel | See examples in Part 3 (Answer Samuel's Question) |
 | **Section 3**: ADR-001 | Explain channel selection | "Selected Channel 15 because noise floor was -89 dBm..." |
-| **Section 4**: Domain Mapping | List components and their ISO domains | "ESP32-C6 radio → SCD; Air → PED" |
+| **Section 4**: Domain Mapping & Component Capabilities | List components and their ISO domains; decompose ESP32-C6 using ISO/IEC 30141 capability model | "ESP32-C6 radio → SCD; Air → PED"; "802.15.4 radio → Network Interface (Active); BLE → Latent" |
 | **Section 5**: First Principles | Answer the 3 questions from Part 4 | Explain inverse square law, fade margin, etc. |
 | **Section 10**: Performance Baselines | Paste your range testing table | Distance vs RSSI vs PER data |
 
@@ -578,7 +615,8 @@ Create a troubleshooting guide:
 ### ISO/IEC 30141 Alignment (30 points)
 - [ ] Correct domain mapping (PED, SCD) with justification (10 pts)
 - [ ] Foundational viewpoint analysis (10 pts)
-- [ ] ADR-001 properly formatted with ISO domain reference (10 pts)
+- [ ] Component Capabilities table completed with justifications (5 pts)
+- [ ] ADR-001 properly formatted with ISO domain reference (5 pts)
 
 ### First Principles Understanding (20 points)
 - [ ] Question 1 answered with correct physics (path loss) (7 pts)

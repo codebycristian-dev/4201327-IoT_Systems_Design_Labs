@@ -140,16 +140,16 @@ idf.py monitor
 pip install flask requests
 ```
 
-**Use the dashboard from `tools/dashboard.py`** (already included in the repository).
+**Use the dashboard from `tools/dashboard_http.py`** (already included in the repository).
 
-**Configure the node IP** in `tools/dashboard.py`:
+**Configure the node IP** in `tools/dashboard_http.py`:
 ```python
 NODE_IP = "fd11:22:33:0:0:0:0:1"  # Replace with actual node IP
 ```
 
 **Run dashboard:**
 ```bash
-python tools/dashboard.py
+python tools/dashboard_http.py
 ```
 
 Open http://localhost:5000 in browser to see dashboard with real-time data and light control.

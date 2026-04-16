@@ -84,6 +84,34 @@ Before you submit `soilsense_v1.bin`, verify your **DDR**:
 * [ ] Is DTLS encryption enabled?
 * [ ] Are threats mitigated?
 
+## 2b. Construction Viewpoint: IoT System Pattern
+
+ISO/IEC 30141 Section 6.7 defines the **Construction Viewpoint** -- the standard's way of saying "show me what you built and how the pieces fit together." It uses **IoT System Patterns** (Table 12) to describe a concrete IoT architecture in terms of its components, networks, capabilities, and interfaces.
+
+Complete the following IoT System Pattern template for your finished SoilSense system. Each row maps to a pattern element from the standard. Fill in the right column with what applies to your deployment.
+
+| Pattern Element | Category | Your SoilSense Implementation |
+|---|---|---|
+| **IoT System** | -- | SoilSense v1.0 |
+| **IoT Components** | Physical entities | _e.g., 3x sensor nodes, 1x border router, 1x dashboard server_ |
+| **Digital Network** | Connectivity | _e.g., Thread mesh (802.15.4) + WiFi backhaul to dashboard_ |
+| **IoT Devices** | Hardware | _e.g., ESP32-C6 with soil moisture + temperature transducers_ |
+| **Primary Capability** | Physical observation | _What physical quantities does the system observe?_ |
+| **Primary Capability** | Control of entities | _What actuations does the system perform (if any)?_ |
+| **Secondary Capability** | Data processing | _e.g., CBOR encoding, threshold alerting_ |
+| **Secondary Capability** | Data transferring | _e.g., CoAP over Thread, HTTP to cloud_ |
+| **Secondary Capability** | Data storage | _e.g., local flash ring-buffer, cloud time-series DB_ |
+| **Interface** | Network | _e.g., IEEE 802.15.4 (Thread), WiFi (802.11)_ |
+| **Interface** | Human UI | _e.g., web dashboard, LED status indicators_ |
+| **Interface** | Application | _e.g., CoAP resources: /sensor/moisture, /sensor/temp_ |
+| **Supplemental** | Security | _e.g., DTLS 1.2 over Thread, TLS to cloud_ |
+| **Supplemental** | Orchestration | _e.g., Thread leader election, mesh routing_ |
+| **Supplemental** | Management | _e.g., OTA firmware updates, battery telemetry_ |
+
+Compare your table to the system you actually flashed. If a row is empty, that is a gap worth noting -- either you did not implement it, or you did not document it.
+
+> **For your DDR:** Include the completed IoT System Pattern table in your DDR final version (Section 8 or an appendix). This is the single-page summary an architect would hand to a reviewer to explain the system's construction.
+
 ---
 
 ## 3. The Stress Test (Self-Audit)
@@ -100,11 +128,12 @@ Perform these tests yourself before submitting:
 
 1.  **Binary:** `soilsense_v1.bin`
 2.  **DDR Final Version:** Complete history of all 8 labs.
-3.  **Video Demo:** A 2-minute video showing:
+3.  **IoT System Pattern:** Completed Construction Viewpoint table (from Section 2b) showing all components, capabilities, and interfaces.
+4.  **Video Demo:** A 2-minute video showing:
     * Sensor heating up (Data change).
     * Dashboard updating.
     * Node disconnection & recovery.
-4.  **Ethics Assessment:** Completed Section 11 of your DDR.
+5.  **Ethics Assessment:** Completed Section 11 of your DDR.
 
 ---
 
@@ -117,8 +146,9 @@ Perform these tests yourself before submitting:
 * [ ] **Video Demo**: Clearly demonstrates functionality (10 pts)
 
 ### ISO/IEC 30141 Alignment (30 points)
-* [ ] **DDR Final**: All ADRs and Viewpoints completed (15 pts)
-* [ ] **System View**: Clear understanding of how domains interact (15 pts)
+* [ ] **DDR Final**: All ADRs and Viewpoints completed (10 pts)
+* [ ] **System View**: Clear understanding of how domains interact (10 pts)
+* [ ] **Construction Viewpoint**: IoT System Pattern table complete and accurate (10 pts)
 
 ### Ethics & Sustainability (20 points)
 * [ ] **Final Ethics Assessment**: Thoughtful answers to the reflection questions (10 pts)

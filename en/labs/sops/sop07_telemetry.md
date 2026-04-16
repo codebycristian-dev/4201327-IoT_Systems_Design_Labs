@@ -36,7 +36,7 @@ cbor_encoder_close_container(&encoder, &map);
 ```
 
 ### 2.2 The Diagnostic Script (Python Dashboard)
-Use the provided script in `tools/dashboard.py`. This acts as the "Cloud Server."
+Use the provided script in `tools/dashboard_http.py`. This acts as the "Cloud Server."
 
 **Setup:**
 1. Create a virtual environment (recommended):
@@ -52,7 +52,7 @@ Use the provided script in `tools/dashboard.py`. This acts as the "Cloud Server.
 
 **Usage:**
 ```bash
-python tools/dashboard.py
+python tools/dashboard_http.py
 ```
 *Note: Ensure you update the IPv6 address in the script to match your device.*
 

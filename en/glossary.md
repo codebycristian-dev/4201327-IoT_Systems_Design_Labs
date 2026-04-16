@@ -246,7 +246,7 @@ The people who care about different aspects of your design:
 - **Samuel** (Senior Architect) - Technical correctness, ISO alignment
 - **Gustavo** (Product Owner) - Cost, customer value
 - **Edwin** (Field Operations) - Deployment, reliability
-- **Sebastian** (Security Lead) - Data protection, compliance
+- **Edward** (Security Lead) - Data protection, compliance
 - **Daniela** (Pilot Customer) - Ease of use, actionable insights
 
 ### Performance Baselines

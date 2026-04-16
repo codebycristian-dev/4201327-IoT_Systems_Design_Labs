@@ -116,7 +116,7 @@ As your project progresses, you'll need to consider different perspectives from 
 
 - **Gustavo** (Product Owner) - Cares about cost and customer value
 - **Edwin** (Field Operations Lead) - Cares about deployment and reliability
-- **Sebastian** (Security Lead) - Cares about data protection
+- **Edward** (Security Lead) - Cares about data protection
 - **Daniela** (Pilot Customer) - The farmer who will actually use your system
 
 **Why introduce them gradually?** In real engineering projects, you don't interact with all stakeholders at once. You'll learn to think from their perspectives as their concerns become relevant to your work.
@@ -129,7 +129,7 @@ As your project progresses, you'll need to consider different perspectives from 
 | **Samuel** | Senior Architect | Technical correctness, ISO alignment | Every lab |
 | **Gustavo** | Product Owner | Customer value, cost targets | Labs 1, 4, 7-8 |
 | **Edwin** | Field Operations Lead | Deployment ease, reliability | Labs 5-8 |
-| **Sebastian** | Security Lead | Data privacy, secure communication | Labs 6-8 |
+| **Edward** | Security Lead | Data privacy, secure communication | Labs 6-8 |
 | **Daniela** | Customer (Pilot Farmer) | Ease of use, actionable insights | Labs 7-8 |
 
 </details>
@@ -203,13 +203,13 @@ As your project progresses, you'll need to consider different perspectives from 
 - Design setup process: How do farmers configure devices without technical expertise?
 
 **Questions You'll Answer**:
-- Sebastian: "How do we prevent sensor spoofing attacks?" *(Translation: Can an attacker inject fake data?)*
+- Edward: "How do we prevent sensor spoofing attacks?" *(Translation: Can an attacker inject fake data?)*
 - Gustavo: "What's the cost of encryption on battery life?" *(Translation: Does security hurt our 3-month battery goal?)*
 - Daniela (Farmer): "Do I need to configure WiFi credentials on every sensor?" *(Translation: Is this easy enough for non-technical users?)*
 
 **Critical Concerns**:
 - Edwin: "Farmers can't be expected to enter 32-character passwords. How do we make provisioning simple?"
-- Sebastian: "We need GDPR compliance for EU customers. Where is data stored?"
+- Edward: "We need GDPR compliance for EU customers. Where is data stored?"
 
 **Deliverables**:
 - DDR sections on security and gateway architecture
@@ -275,7 +275,7 @@ Different stakeholders care about different aspects of your design:
 **To Edwin (Operations)**: Reliability, troubleshooting, deployment
 - "If a node fails to join the network, check these 3 things in this order..."
 
-**To Sebastian (Security)**: Threat mitigation, compliance
+**To Edward (Security)**: Threat mitigation, compliance
 - "We use AES-128-CCM (aligned with Thread spec) providing both confidentiality and authenticity..."
 
 ---
@@ -296,7 +296,7 @@ Different stakeholders care about different aspects of your design:
 - ✅ Samuel approves your architecture
 - ✅ Gustavo confirms product requirements met
 - ✅ Edwin has clear deployment procedures
-- ✅ Sebastian validates security implementation
+- ✅ Edward validates security implementation
 
 ---
 
@@ -328,6 +328,32 @@ While GreenField Technologies is fictional, the scenario is grounded in reality:
 - **Consider all stakeholders** when making design decisions
 - **Use professional language**: "I selected CoAP because..." vs "I had to use CoAP for the assignment"
 - **Build a portfolio**: These documents showcase your work to future employers
+
+---
+
+## 8b. Business Viewpoint Exercise (ISO/IEC 30141 Section 6.3)
+
+The Business Viewpoint addresses *why* a system exists before engineers decide *how* to build it. ISO/IEC 30141 Table 3 defines three core concerns for this viewpoint. Your task is to answer each one in the context of GreenField Technologies.
+
+**In-class discussion**: Write 200-300 words total covering all three questions below.
+
+### Concern 1 — "How to leverage the various capabilities of an IoT system to provide value for a business?"
+
+GreenField's value proposition is reducing water waste by 30% while maintaining crop yield. Consider how the sensor network creates this value. What is the path from raw data (soil moisture, weather) through insights (analytics, thresholds) to action (valve control, alerts to Daniela's field teams)? Where in that chain does Gustavo's business actually capture value?
+
+### Concern 2 — "How to use IoT for innovative new business models?"
+
+GreenField currently sells hardware (nodes, gateways) to farm operators. But what if they sold "irrigation-as-a-service" instead? Think about what that shift would mean for the system architecture: Who owns the data? What uptime SLAs would Gustavo need to guarantee? How does subscription billing change the requirements for reliability and remote management?
+
+### Concern 3 — "How do characteristics of an IoT system influence business and system owner?"
+
+ISO/IEC 30141 lists emergent characteristics of IoT systems, including scalability, composability, interoperability, and others. Pick two characteristics and explain how they affect Gustavo's business decisions. For example: scalability means GreenField can start with 10-node pilot deployments and grow to 500-node farms without redesigning the core platform. That directly impacts pricing strategy and sales approach.
+
+### Why this matters
+
+The Business Viewpoint is often skipped by engineers, but it determines which technical tradeoffs matter.
+
+Understanding *why* the system is being built prepares you for Labs 1-8, where you will decide *how* to build it. A design choice that looks optimal in isolation (e.g., choosing the lowest-power radio) may be wrong if it conflicts with the business model (e.g., the service model requires real-time dashboards that need higher bandwidth).
 
 ---
 
@@ -375,7 +401,7 @@ While GreenField Technologies is fictional, the scenario is grounded in reality:
 
 ---
 
-### Sebastian - Security Lead
+### Edward - Security Lead
 - **Background**: Cybersecurity, previously at industrial control systems company
 - **Personality**: Skeptical, threat-model driven, pragmatic about risk
 - **Pet peeves**: "Security through obscurity", unpatched vulnerabilities

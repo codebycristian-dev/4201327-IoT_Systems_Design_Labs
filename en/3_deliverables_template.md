@@ -33,7 +33,7 @@
 *   **To Daniela:**
 
 ### Lab 6: Security
-*   **To Sebastian (Security):**
+*   **To Edward (Security):**
 
 ### Lab 7: Dashboard
 *   **To Gustavo (Product):**
@@ -53,11 +53,19 @@
 
 ---
 
-## 4. ISO/IEC 30141 Domain Mapping
+## 4. ISO/IEC 30141 Mapping
+
+### Domain Mapping
 
 | Component | ISO Domain | Justification |
 |-----------|------------|---------------|
 |           |            |               |
+
+### Component Capabilities
+
+| Capability Category | Subcategory | Component/Feature | Active/Latent | Lab Introduced |
+|---------------------|-------------|-------------------|---------------|----------------|
+|                     |             |                   |               |                |
 
 ---
 
@@ -93,3 +101,52 @@
 *   [ ] **Lab 5:** System works locally without cloud (Sustainability).
 *   [ ] **Lab 6:** Encryption enabled (Privacy).
 *   [ ] **Lab 8:** End-of-Life plan considered.
+
+---
+
+## 8. Viewpoint Analysis
+
+| Viewpoint | Labs Addressed | Key Concerns Documented |
+|-----------|----------------|-------------------------|
+| Foundational |            |                         |
+| Business |               |                         |
+| Usage |                  |                         |
+| Functional |             |                         |
+| Trustworthiness |        |                         |
+| Construction |           |                         |
+
+---
+
+## 9. Trustworthiness Audit (Lab 6+)
+
+| Characteristic | Addressed? | How | Gaps |
+|----------------|------------|-----|------|
+| Availability |            |     |      |
+| Confidentiality |         |     |      |
+| Integrity |               |     |      |
+| Reliability |             |     |      |
+| Resilience |              |     |      |
+| Safety |                  |     |      |
+| Compliance |              |     |      |
+
+---
+
+## 10. Construction Viewpoint - IoT System Pattern (Lab 8)
+
+| Pattern Element | Category | Your System |
+|-----------------|----------|-------------|
+| IoT System |            |             |
+| IoT Components |         |             |
+| Digital Network |        |             |
+| IoT Devices |            |             |
+| Primary Capability (observation) | |   |
+| Primary Capability (control) | |       |
+| Secondary Capability (processing) | |  |
+| Secondary Capability (transferring) | | |
+| Secondary Capability (storage) | |     |
+| Interface (network) |    |             |
+| Interface (human UI) |   |             |
+| Interface (application) | |            |
+| Supplemental (security) | |            |
+| Supplemental (orchestration) | |       |
+| Supplemental (management) | |          |

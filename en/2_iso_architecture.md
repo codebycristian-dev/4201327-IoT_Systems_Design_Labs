@@ -23,7 +23,7 @@ This guide introduces the ISO/IEC 30141:2024 standard and explains how it applie
 
 **With standards:**
 - Client: "Where does authentication happen?"
-- You: "In the RAID (Resource Access & Interchange Domain), following ISO/IEC 30141 Section 8.7."
+- You: "In the RAID (Resource Access & Interchange Domain), as defined in the Functional Viewpoint of ISO/IEC 30141."
 - Client: "Perfect, that matches our architecture. Ship it!" ✅
 
 **Standards provide a common language** for architects, clients, and stakeholders.
@@ -106,8 +106,24 @@ The standard describes IoT systems from **six complementary viewpoints**:
 
 ---
 
-## 3. Six Functional Domains
-The **Functional Viewpoint** (Viewpoint 4) divides IoT systems into **six domains**.
+## 3. Viewpoints vs. Domains: An Important Distinction
+
+Before we dive into the domain details, let's clear up a common confusion.
+
+**Viewpoints** and **domains** are different things in ISO/IEC 30141:
+
+- **Six Viewpoints** (Section 6) are *lenses* — they answer different questions about the same system (What is it? Why build it? Who uses it? What does it do? Is it trustworthy? How is it built?). We covered them in Section 2 above.
+- **Six Functional Domains** (PED, SCD, ASD, OMD, UD, RAID) are categories within the **Functional Viewpoint** specifically. They describe *where different functions live* in an IoT system.
+
+Think of it this way: if the viewpoints are different camera angles on a building, the domains are the floor plan visible from the Functional angle.
+
+**Why this matters**: When Samuel asks "Which domain does this belong to?" he's asking about functional classification. When he asks "Analyze this from the Trustworthiness viewpoint," he's asking you to apply a different lens — one that cuts *across* all domains (security, reliability, and safety apply everywhere, not just in one box).
+
+Throughout this course, we use the domains as a practical tool for organizing components and data flows. But your DDR should address multiple viewpoints, not just domain mapping.
+
+## 4. The Six Functional Domains
+
+The **Functional Viewpoint** (Viewpoint 4) organizes IoT system functions into **six domains**. Each domain groups related capabilities.
 
 ### Visual Overview
 
@@ -181,7 +197,7 @@ The **Functional Viewpoint** (Viewpoint 4) divides IoT systems into **six domain
 - **IoT Gateways**: Connect SCD to other domains (protocol conversion, data aggregation)
 - **Local control systems**: Run control loops without cloud connectivity
 
-**Functions** (ISO/IEC 30141 Section 8.3):
+**Functions** (ISO/IEC 30141 Section 6.4-6.5):
 - Sensing and actuation
 - Protocol conversion (e.g., Thread → WiFi)
 - Address mapping (e.g., MAC → IPv6)
@@ -317,7 +333,7 @@ Data flows through all six domains in ~200-500 ms.
 
 ---
 
-## 4. Mapping to Course Labs
+## 5. Mapping to Course Labs
 ### Lab Progression and Domain Focus
 
 | Lab | Title | Primary Domains | What You Build |
@@ -373,32 +389,39 @@ By Week 8, you have a complete ISO/IEC 30141-compliant system!
 
 **Lab 6-8**: IoT **Environment** (complete operational system)
 - Full stack: Sensors → Mesh → Gateway → Backend → Dashboard
-- Understands: All six domains
+- Understands: All six domains, all six viewpoints
 
-**ISO/IEC 30141 Hierarchy**:
+**ISO/IEC 30141 Hierarchy** (Section 6.2.2.2):
 ```
 IoT Component → IoT System → IoT Environment
  (Lab 1-2)       (Lab 3-5)       (Lab 6-8)
 ```
 
+**Viewpoint Progression**:
+```
+Foundational + Usage    → Business + Functional  → Trustworthiness + Construction
+ (Lab 1-2: "what is     (Lab 3-5: "what does     (Lab 6-8: "is it secure?
+  this device?")          the system do?")          how do we build it?")
+```
+
 ---
 
-## 5. Emergent Characteristics
+## 6. Emergent Characteristics
 ### What Makes IoT Systems Special?
 
-ISO/IEC 30141 Section 7 defines **emergent characteristics** — properties that arise from the system as a whole, not individual components.
+ISO/IEC 30141 Section 6.2.2.3 defines **emergent characteristics** — properties that arise from the system as a whole, not individual components.
 
 | Characteristic | Definition | Course Example |
 |----------------|------------|----------------|
 | **Composability** | Components combine into larger systems | ESP32-C6 + Border Router + Dashboard = Complete system |
+| **Functional/Management Separation** | Data plane and control plane are independent | CoAP sensor data vs. Thread leader election — you can change one without touching the other |
 | **Heterogeneity** | Diverse devices, protocols, data formats | Thread + WiFi, CoAP + HTTP, CBOR + JSON |
+| **Highly distributed** | Sub-systems are physically separated and remotely located | Sensor nodes in a field, border router at the farmhouse, dashboard in the cloud |
 | **Modularity** | Independent modules with defined interfaces | Each CoAP resource is independent |
+| **Network communication** | Distributed components communicate via multiple network types | Proximity (802.15.4), Access (CoAP), Service (cloud), User (dashboard) |
 | **Scalability** | System grows without architectural change | Add more Thread devices without reconfiguring |
-| **Network communication** | Distributed components communicate | All devices exchange data via mesh |
 | **Shareability** | Resources shared among multiple users | Multiple dashboard users access same sensors |
-| **Accuracy** | Data quality and reliability | Sensor calibration, error detection |
-| **Autonomy** | Self-management without human intervention | Mesh self-healing, automatic OTA rollback |
-| **Manageability** | Remote monitoring and control | Dashboard, OTA updates |
+| **Accuracy** | Data quality and measurement reliability | Sensor calibration, error detection, environmental influence on readings |
 
 ### Example: Scalability
 
@@ -433,7 +456,7 @@ Router fails → Mesh detects failure (30s) → Self-heals (re-routes) → No hu
 
 ---
 
-## 6. Q&A and Course Expectations
+## 7. Q&A and Course Expectations
 ### Course Deliverables
 
 1. **DDR (Decision & Design Record)**: Living document tracking your architectural decisions
@@ -464,7 +487,7 @@ Router fails → Mesh detects failure (30s) → Self-heals (re-routes) → No hu
 
 ### Study Resources
 
-- **ISO/IEC 30141:2024 Standard**: [ISO_IEC_30141_2024(en).pdf](../ISO_IEC_30141_2024(en).pdf) (focus on Sections 6-8)
+- **ISO/IEC 30141:2024 Standard**: [ISO_IEC_30141_2024(en).pdf](../ISO_IEC_30141_2024(en).pdf) (focus on Section 5 for context, Section 6 for viewpoints and views, Annex A for construction patterns)
 - **Quick References**: [references.md](references.md) — CoAP, Thread, ESP-IDF cheat sheets and performance baselines
 - **Project Scenario**: [1_project_scenario.md](1_project_scenario.md) — GreenField Technologies context
 - **Lab Guides**: [labs/](labs/) — 8 role-based lab guides with integrated theory
@@ -491,9 +514,10 @@ A: ~6-8 hours per lab (2-3 hours in class, 4-5 hours outside). Labs 6-8 may take
 ## Homework Assignment (Due Next Week)
 
 ### Part 1: Read ISO/IEC 30141 Excerpts
-- Section 6: Reference Architecture (Viewpoints)
-- Section 8.3: Sensing & Controlling Domain (SCD)
-- **Goal**: Familiarize yourself with standard terminology
+- Section 6.2: Foundational IoT viewpoint (IoT concepts, components, systems, environments)
+- Section 6.4: Usage viewpoint (sensing, actuating, user interactions)
+- Section 6.5: Functional viewpoint (data, management, communication functions)
+- **Goal**: Familiarize yourself with standard terminology and the difference between viewpoints and domains
 
 ### Part 2: Multi-Viewpoint Analysis of a Real IoT System
 
@@ -548,10 +572,11 @@ RAID: OAuth login, API for third-party apps (MyFitnessPal, Strava)
 ### Key Takeaways
 
 1. ✅ **ISO/IEC 30141** provides a common language for IoT architecture
-2. ✅ **Six viewpoints** answer different questions (what, why, who, how, security, deployment)
-3. ✅ **Six domains** organize functional components (PED, SCD, ASD, OMD, UD, RAID)
-4. ✅ **Course labs** progressively build a complete ISO-compliant system
-5. ✅ **Emergent characteristics** (scalability, autonomy, etc.) distinguish IoT from traditional embedded systems
+2. ✅ **Six viewpoints** are lenses that answer different questions (Foundational, Business, Usage, Functional, Trustworthiness, Construction)
+3. ✅ **Six domains** (PED, SCD, ASD, OMD, UD, RAID) live within the Functional Viewpoint and organize where system functions reside
+4. ✅ **Viewpoints ≠ Domains** — viewpoints cut across all domains; domains categorize functions within one viewpoint
+5. ✅ **Course labs** progressively build a complete ISO-compliant system, introducing both new domains and new viewpoints each week
+6. ✅ **Emergent characteristics** (scalability, functional/management separation, etc.) distinguish IoT from traditional embedded systems
 
 ### Looking Ahead
 

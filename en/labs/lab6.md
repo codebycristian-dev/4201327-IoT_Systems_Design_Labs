@@ -12,7 +12,7 @@
 
 ### Your Mission This Week
 
-**From:** Sebastian (Security Lead)
+**From:** Edward (Security Lead)
 **To:** Firmware Team
 **Subject:** VULNERABILITY DETECTED
 
@@ -25,13 +25,13 @@ I was able to:
 **This is a critical stop-ship issue.**
 We need **Defense in Depth**. You must implement **DTLS (Datagram Transport Layer Security)** to encrypt the CoAP links.
 
-— Sebastian
+— Edward
 
 ### Stakeholders Counting On You
 
 | Stakeholder | Their Question | How This Lab Helps |
 |---|---|---|
-| **Sebastian (Security)** | "Can an attacker inject fake commands?" | DTLS provides Integrity and Authentication. |
+| **Edward (Security)** | "Can an attacker inject fake commands?" | DTLS provides Integrity and Authentication. |
 | **Daniela (Farmer)** | "Is my farm data private?" | Encryption ensures Confidentiality. |
 | **ISO 30141 Auditor** | "Have you addressed Trustworthiness?" | You are implementing the **Trustworthiness Viewpoint**. |
 
@@ -58,6 +58,24 @@ graph TD
     style RAID fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
+### Trustworthiness Characteristics (ISO/IEC 30141 Section 6.6)
+
+The standard defines seven characteristics that collectively define a trustworthy IoT system. Use this table as a checklist for your DTLS implementation.
+
+| Characteristic | Standard Definition | How DTLS Addresses It | What to Test |
+|---|---|---|---|
+| **Availability** | System performs its function when required | Graceful degradation if DTLS handshake fails; connection retry logic | Disable the server mid-handshake. Does the client recover? |
+| **Confidentiality** | Information is not disclosed to unauthorised entities | DTLS encrypts CoAP payloads; eavesdropper sees only ciphertext | Capture packets with Wireshark. Confirm payload is unreadable. |
+| **Integrity** | Data has not been altered or destroyed in an unauthorised manner | DTLS MAC detects any tampering with message contents | Flip a byte in a captured DTLS record. Does the receiver reject it? |
+| **Reliability** | System performs consistently under stated conditions | DTLS retransmission compensates for lossy Thread links | Introduce artificial packet loss. Do messages still arrive? |
+| **Resilience** | System can withstand and recover from adverse events | Key compromise recovery; ability to rotate PSKs without reflashing | Compromise a PSK. How fast can you rotate to a new one? |
+| **Safety** | No unacceptable risk of harm to persons or environment | Authentication prevents fake actuator commands (e.g. "OPEN valve") | Send an unauthenticated "OPEN valve" command. Is it rejected? |
+| **Compliance** | Adherence to applicable legislation and regulations | GDPR Art. 32 requires encryption of personal data in transit | Document which data qualifies as personal and confirm it is encrypted. |
+
+> **Note:** The standard treats trustworthiness as a cross-cutting concern across all domains, not a separate domain. Your STRIDE threat model (Task A) maps to these characteristics.
+
+> **For your DDR:** Walk through each row. Document which characteristics your implementation addresses and which remain gaps. A gap is acceptable if you justify the risk; an undocumented gap is not.
+
 ---
 
 ## 2. Theory Preamble (15 min)
@@ -65,6 +83,8 @@ graph TD
 
 * **STRIDE Model:** Spoofing, Tampering, Repudiation, Info Disclosure, DoS, Elevation of Privilege.
 * **The Cost of Security:** A DTLS handshake requires ~6 flights of packets. It is "expensive" in energy. We must minimize how often we handshake.
+
+> **In other stacks:** LoRaWAN encrypts at the network level (AES-128 built into the protocol) — no application-layer DTLS needed. Zigbee uses a network-wide key (weaker model). WiFi/MQTT systems typically use TLS (TCP-based). The Trustworthiness characteristics (confidentiality, integrity, etc.) apply regardless of mechanism.
 
 ---
 
@@ -92,6 +112,7 @@ Use the Sniffer.
 * **Threat Model:** The completed STRIDE table.
 * **Performance Check:** Measure the time to complete a DTLS handshake. Is it `< 3 seconds`?
 * **ADR-006 (Encryption):** Rationale for using Pre-Shared Keys vs. Certificates (Constraint: Flash size and complexity).
+* **Trustworthiness Audit:** For each of the 7 ISO/IEC 30141 trustworthiness characteristics, document whether your implementation addresses it and identify any gaps.
 
 ---
 
@@ -125,8 +146,9 @@ Security is the technical foundation of privacy. Your DTLS implementation protec
 * [ ] Packet sniffing verifies payload is encrypted (15 pts)
 
 ### ISO/IEC 30141 Alignment (30 points)
-* [ ] Trustworthiness Viewpoint addressed (15 pts)
-* [ ] Threat Model (STRIDE) completed (15 pts)
+* [ ] Trustworthiness Viewpoint: all 7 characteristics audited (10 pts)
+* [ ] Threat Model (STRIDE) completed (10 pts)
+* [ ] Gaps identified and documented (10 pts)
 
 ### Analysis (20 points)
 * [ ] ADR-006 (Encryption) justification (10 pts)
